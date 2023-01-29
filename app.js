@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const nodemailer = require('nodemailer')
+const http = require('http');
 
 const app = express()
 app.use(bodyParser.json())
@@ -31,7 +32,11 @@ app.post('/contact', (req, res) => {
     }
   })
 })
-
-app.listen(3000, () => {
+const port = process.env.PORT || 3000
+const servert = http.createServer(app);
+servert.listen(port, () => {
   console.log('Server started on http://localhost:3000')
 })
+// app.listen(3000, () => {
+//   console.log('Server started on http://localhost:3000')
+// })
