@@ -6,6 +6,9 @@ const http = require('http');
 const app = express()
 app.use(bodyParser.json())
 
+var cors = require('cors');
+app.use(cors());
+
 app.post('/contact', (req, res) => {
   const { name, surname,phone,email,company ,message,reciverEmail,projectCategory,projectBudge } = req.body
   // Use nodemailer to send email
