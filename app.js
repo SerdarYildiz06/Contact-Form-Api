@@ -7,8 +7,14 @@ const app = express()
 app.use(bodyParser.json())
 
 var cors = require('cors');
-app.use(cors());
+app.use(allowCrossDomain);
 
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+}
 app.post('/contact', (req, res) => {
   const { name, surname,phone,email,company ,message,reciverEmail,projectCategory,projectBudge } = req.body
   // Use nodemailer to send email
