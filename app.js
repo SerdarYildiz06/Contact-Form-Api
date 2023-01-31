@@ -6,15 +6,17 @@ const http = require('http');
 const app = express()
 app.use(bodyParser.json())
 
-var cors = require('cors');
-app.use(allowCrossDomain);
-
 var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', "*");
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
 }
+
+var cors = require('cors');
+app.use(allowCrossDomain,cors());
+
+
 app.post('/contact', (req, res) => {
   const { name, surname,phone,email,company ,message,reciverEmail,projectCategory,projectBudge } = req.body
   // Use nodemailer to send email
